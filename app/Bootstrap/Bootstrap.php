@@ -12,6 +12,7 @@ class Bootstrap
     public function inject(): void
     {
         HttpBootstrap::start_sessions();
+        DIBootstrap::boot();
     }
 
     public function __destruct()
