@@ -1,0 +1,14 @@
+{
+    "name": "artin/japh",
+    "description": "A php fullstack framework!",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "artinZareie",
+            "email": "artin.zareie@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

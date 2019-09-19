@@ -1,0 +1,24 @@
+{
+  "name": "japh",
+  "version": "1.0.0",
+  "description": "A fullstack framework!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artinZareie/Japh.git"
+  },
+  "keywords": [
+    "PHP",
+    "Framework",
+    "Fullstack"
+  ],
+  "author": "Artin Zareie <artin.zareie@yahoo.com>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/artinZareie/Japh/issues"
+  },
+  "homepage": "https://github.com/artinZareie/Japh#readme"
+}
