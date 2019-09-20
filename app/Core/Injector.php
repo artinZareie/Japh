@@ -1,14 +1,26 @@
 <?php
 
 namespace App\Core;
+use DI\{
+    Container,
+    ContainerBuilder
+};
 
+/**
+ * Dependency Injector
+ */
 class Injector
 {
+    /**
+     * Dependecy Injector Container
+     *
+     * @var Container
+     */
     private static $container;
 
     public static function buildContainer(): void 
     {
-        $builder = new \DI\ContainerBuilder();
+        $builder = new ContainerBuilder();
         $builder->useAnnotations(true);
         if (config("production")) {
             $builder->enableCompilation(dir_glue(config("base_root"), "temp"));
@@ -17,7 +29,7 @@ class Injector
         self::$container = $builder->build();
     }
 
-    public static function getContainer(): \DI\Container
+    public static function getContainer(): Container
     {
         return self::$container;
     }
