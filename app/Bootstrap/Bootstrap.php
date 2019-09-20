@@ -33,6 +33,7 @@ class Bootstrap
     {
         $this->httpBoot();
         $this->dependencyInjectionBoot();
+        $this->exceptionBoot();
     }
 
     /**
@@ -61,6 +62,18 @@ class Bootstrap
     public function dependencyInjectionBoot(): void
     {
         DIBootstrap::boot();        
+    }
+
+    /**
+     * Exception Boot
+     * 
+     * Register an exception handler like whoops and etc. 
+     *
+     * @return void
+     */
+    public function exceptionBoot(): void
+    {
+        ExceptionBootstrap::registerWhoops();
     }
 
     /**

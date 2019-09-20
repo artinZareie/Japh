@@ -49,13 +49,18 @@ class Kernel implements IKernel, ISingletone
      */
     public function call()
     {
-        $c = Collection::collect([1, 32, 5, 10]);
-        $c->add(120);
-        $c->remove(32);
-        $c->add(127);
-        $c->remove(5);
-        foreach ($c as $item) {
-            var_dump($item);
+        try {
+            throw new InterruptException("Hello World!", new Renderable);
+            $c = Collection::collect([1, 32, 5, 10]);
+            $c->add(120);
+            $c->remove(32);
+            $c->add(127);
+            $c->remove(5);
+            foreach ($c as $item) {
+                var_dump($item);
+            }
+        } catch (InterruptException $e) {
+            Renderer::render($e->getRenderable());
         }
     }
 }
