@@ -10,6 +10,10 @@ class Injector
     {
         $builder = new \DI\ContainerBuilder();
         $builder->useAnnotations(true);
+        if (config("production")) {
+            $builder->enableCompilation(dir_glue(config("base_root"), "temp"));
+            $builder->writeProxiesToFile(true, dir_glue(config("base_root"), "temp", "proxies"));
+        }
         self::$container = $builder->build();
     }
 
