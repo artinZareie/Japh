@@ -11,8 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php-di/php-di": "dev-master",
-        "doctrine/annotations": "^2.0@dev"
+        "php-di/php-di": "dev-master"
     },
     "autoload": {
         "psr-4": {
