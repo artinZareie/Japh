@@ -4,6 +4,15 @@ namespace App\Core;
 
 use Exception;
 
+/**
+ * Interrupt Exception
+ * 
+ * This exception is a little like `int 0x80 && hlt` in assembly :/
+ * it tells the kernel: 'hey, stop application and render my renderable'
+ * then the kernel will stop execution, and will render your renderable!
+ * 
+ * @example https://github.com/artinZareie/Japh/wiki/Interrupt-Exception complete documention
+ */
 class InterruptException extends Exception
 {
     /**
