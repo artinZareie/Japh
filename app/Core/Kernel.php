@@ -6,7 +6,8 @@ class Kernel implements IKernel, ISingletone
 {
     private static $instance;
 
-    public static function getInstance(){
+    public static function getInstance(): ISingletone
+    {
         if (self::$instance != null) {
             return self::$instance;
         }
