@@ -17,4 +17,9 @@ class Injector
     {
         return self::$container;
     }
+
+    public static function getInstance(string $class)
+    {
+        return slef::$container->get($class);
+    }
 }
