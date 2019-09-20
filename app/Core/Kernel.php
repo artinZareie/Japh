@@ -2,14 +2,19 @@
 
 namespace App\Core;
 
-class Kernel implements IKernel
+class Kernel implements IKernel, ISingletone
 {
-    public function __construct($fireline)
-    {
-        
+    private static $instance;
+
+    public static function getInstance(){
+        if (self::$instance != null) {
+            return self::$instance;
+        }
+        self::$instance = new static();
+        return self::$instance;
     }
 
-    public function call(array $injects = [])
+    public function call()
     {
         
     }
