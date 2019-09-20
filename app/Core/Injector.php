@@ -9,6 +9,7 @@ class Injector
     public static function buildContainer(): void 
     {
         $builder = new \DI\ContainerBuilder();
+        $builder->useAnnotations(true);
         self::$container = $builder->build();
     }
 
