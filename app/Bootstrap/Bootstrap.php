@@ -22,9 +22,4 @@ class Bootstrap
         $kernel = inject(Kernel::class);
         $kernel->call();
     }
-
-    public function __destruct()
-    {
-        
-    }
 }

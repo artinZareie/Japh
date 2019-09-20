@@ -20,6 +20,6 @@ class Injector
 
     public static function get(string $class)
     {
-        return slef::$container->get($class);
+        return self::$container->get($class);
     }
 }

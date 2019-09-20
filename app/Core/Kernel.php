@@ -11,7 +11,7 @@ class Kernel implements IKernel, ISingletone
         if (self::$instance != null) {
             return self::$instance;
         }
-        self::$instance = new static();
+        self::$instance = Injector::get(self::class);
         return self::$instance;
     }
 
