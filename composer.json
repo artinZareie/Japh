@@ -14,9 +14,6 @@
         "php-di/php-di": "dev-master",
         "doctrine/annotations": "^1.7"
     },
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "2.*"
-    },
     "autoload": {
         "psr-4": {
             "App\\": "app"
