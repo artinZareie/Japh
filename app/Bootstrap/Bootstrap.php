@@ -19,8 +19,8 @@ class Bootstrap
 
     public function runApplication()
     {
-        $kernel = Kernel::getInstance();
-        $kernel->call();    
+        $kernel = inject(Kernel::class);
+        $kernel->call();
     }
 
     public function __destruct()
