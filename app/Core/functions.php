@@ -30,6 +30,9 @@ function config(?string $name = null, string $file = "app")
 
 function inject(string $class)
 {
-    // TODO: Use Injector class to inject the dependency
-    // NOTICE: Singletones will be filter
+    $singletons = config("singletones", "kernel");
+    if (in_array($class, $singletons)) {
+        return call_user_func($class . "::getInstance");
+    }
+    return App\Core\Injector::get($class);
 }
