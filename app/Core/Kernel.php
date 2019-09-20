@@ -17,11 +17,6 @@ class Kernel implements IKernel, ISingletone
 
     public function call()
     {
-        
-    }
 
-    public function result()
-    {
-        
     }
 }
