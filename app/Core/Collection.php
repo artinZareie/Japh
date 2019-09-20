@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core;
+use Iterator;
 
 /**
  * Collection
@@ -8,7 +9,7 @@ namespace App\Core;
  * Collectios are like indexed arrays but with 
  * some extra oop things and some utilities.
  */
-class Collection
+class Collection implements Iterator
 {
     /**
      * collection
@@ -16,6 +17,12 @@ class Collection
      * @var array
      */
     private $collection;
+    /**
+     * Iterator position
+     *
+     * @var integer
+     */
+    private $position = 0;
 
     /**
      * Construct
@@ -23,7 +30,7 @@ class Collection
      * @param array $values
      */
     public function __construct(array $values){
-        $this->collection = $values;
+        $this->collection = array_values($values);
     }
 
     public static function collect(array $values){
@@ -38,7 +45,7 @@ class Collection
      */
     public function add($value): void
     {
-        array_push($this->collection, $value);
+        $this->collection[] = $value;
     }
 
     /**
@@ -55,10 +62,100 @@ class Collection
             if ($value == $item) 
                 unset($this->collection[$key]);
         }
+        $this->sortKeys();
     }
 
+    /**
+     * uniqe
+     * 
+     * Give a collection of unique values of current collection.
+     *
+     * @return Collection
+     */
     public function uniques(): Collection
     {
         return Collection::collect(array_unique($this->collection));
     }
+
+    /**
+     * Sort Keys
+     *
+     * @return void
+     */
+    public function sortKeys(): void {
+        $this->collection = array_values($this->collection);
+    }
+
+    /**
+     * Sort
+     * 
+     * Sort values
+     *
+     * @return void
+     */
+    public function sort(): void {
+        $this->collection = sort($this->collection);
+        $this->sortKeys();    
+    }
+
+    /**
+     * Rewind function
+     * 
+     * Iterator Interface
+     *
+     * @return void
+     */
+    public function rewind() {
+        $this->position = 0;
+        sort($this->collection);
+    }
+
+    /**
+     * validate function
+     * 
+     * Iterator Interface
+     *
+     * @return void
+     */
+    public function valid(){
+        return isset($this->collection[$this->position]);
+    }
+
+    /**
+     * current function
+     * 
+     * Iterator Interface
+     *
+     * @return mixed
+     */
+    public function current() {
+        return $this->collection[$this->position];
+    }
+
+    /**
+     * key function
+     * 
+     * Iterator Interface
+     *
+     * @return void
+     */
+    public function key(): int {
+        return $this->position;        
+    }
+
+    /**
+     * next function
+     * 
+     * Iterator Interface
+     *
+     * @return void
+     */
+    public function next() {
+        ++$this->position;
+    }
+
+    public function toArray(){
+        return $this->collection;
+    }
+
 }
