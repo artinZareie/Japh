@@ -4,5 +4,6 @@ namespace App\Core;
 
 interface IKernel
 {
-    public function call();
+    public function call(): void;
+    public function render(): void;
 }

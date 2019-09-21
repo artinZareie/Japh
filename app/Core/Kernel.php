@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Core;
+use App\Firelines\Cli\Handler as CliHandler;
 
 /**
  * Main Kernel
@@ -15,6 +16,12 @@ class Kernel implements IKernel, ISingletone
      * @var Kernel
      */
     private static $instance;
+    /**
+     * Renderable context
+     *
+     * @var IRenderable
+     */
+    private $renderableContext;
 
     /**
      * getInstance
@@ -32,13 +39,6 @@ class Kernel implements IKernel, ISingletone
         self::$instance = Injector::get(self::class);
         return self::$instance;
     }
-
-    /**
-     * @Inject
-     * @var Platform
-     */
-    private $hello;
-
     /**
      * Kernel call
      * 
@@ -47,20 +47,22 @@ class Kernel implements IKernel, ISingletone
      *
      * @return void
      */
-    public function call()
+    public function call(): void
     {
         try {
-            throw new InterruptException("Hello World!", new Renderable);
-            $c = Collection::collect([1, 32, 5, 10]);
-            $c->add(120);
-            $c->remove(32);
-            $c->add(127);
-            $c->remove(5);
-            foreach ($c as $item) {
-                var_dump($item);
+            if (Platform::isCli()) {
+                $handler = inject(CliHandler::class);
             }
+            $renderable_context = $handler->fire();
         } catch (InterruptException $e) {
             Renderer::render($e->getRenderable());
+        }
+    }
+
+    public function render(): void
+    {
+        if (Platform::isCli()) {
+            Renderer::renderToTerminal($this->renderableContext);
         }
     }
 }

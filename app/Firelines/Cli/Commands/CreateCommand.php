@@ -5,9 +5,9 @@ use App\Core\IRenderable;
 
 class CreateCommand implements ICommand
 {
-    public function run(array $args): IRenderable
+
+    public function run(array $args): string
     {
-        $map = inject(CommandMap::class);
-        return $map->runCommand();
+        return "sadas";
     }
 }

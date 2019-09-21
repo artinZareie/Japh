@@ -5,5 +5,5 @@ use App\Core\IRenderable;
 
 interface ICommand 
 {
-    public function run(array $args): IRenderable;
+    public function run(array $args): string;
 }

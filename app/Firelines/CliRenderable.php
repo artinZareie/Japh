@@ -2,7 +2,9 @@
 
 namespace App\Firelines;
 
-class CliRenderable
+use App\Core\IRenderable;
+
+class CliRenderable implements IRenderable
 {
     private $screen_buffer = "";
 

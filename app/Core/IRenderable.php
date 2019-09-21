@@ -4,5 +4,5 @@ namespace App\Core;
 
 interface IRenderable
 {
-    public function __toStirng(): string;
+    public function __toString(): string;
 }
