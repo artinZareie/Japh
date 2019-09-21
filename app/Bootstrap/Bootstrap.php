@@ -2,6 +2,7 @@
 
 namespace App\Bootstrap;
 use App\Core\Kernel;
+use App\Core\Platform;
 
 /**
  * Bootstrap class
@@ -32,6 +33,7 @@ class Bootstrap
     public function boot(): void
     {
         $this->httpBoot();
+        $this->cliBoot();
         $this->dependencyInjectionBoot();
         $this->exceptionBoot();
     }
@@ -48,6 +50,18 @@ class Bootstrap
     public function httpBoot(): void
     {
         HttpBootstrap::start_sessions();        
+    }
+
+    /**
+     * Cli Boot
+     * 
+     * Runs ob_start and other things to use cli.
+     *
+     * @return void
+     */
+    public function cliBoot(): void
+    {
+        if (Platform::isCli()) CliBootstrap::boot();
     }
 
     /**

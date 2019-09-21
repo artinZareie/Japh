@@ -7,7 +7,9 @@
  * class, namespace and etc. will apear hear.
  */
 
- /**
+use App\Core\CommandLine;
+
+/**
   * Dir Glue 
   *
   * Implode all parts with directory seprator.
@@ -45,6 +47,15 @@ function config(?string $name = null, string $file = "app")
     return null;
 }
 
+/**
+ * Inject Function
+ * 
+ * Useful cases for this function are using DI or Singletones.
+ * If you pass name of a singletone or a DI, it will return you an instance.
+ *
+ * @param string $class
+ * @return void
+ */
 function inject(string $class)
 {
     $singletons = config("singletones", "kernel");
@@ -54,6 +65,14 @@ function inject(string $class)
     return App\Core\Injector::get($class);
 }
 
+/**
+ * Dump Die
+ * 
+ * Var_dump given parameters and then execute die().
+ *
+ * @param mixed ...$vars
+ * @return void
+ */
 function dd(...$vars): void
 {
     if (!config("production")) {
@@ -62,4 +81,17 @@ function dd(...$vars): void
         }
         die();
     }
+}
+
+/**
+ * Terminal Print
+ * 
+ * Calls CommandLine::print with parameters flush the screen buffer.
+ *
+ * @param string $expr
+ * @return void
+ */
+function terminalPrint(string $expr): void
+{
+    CommandLine::ptint($expr);
 }
