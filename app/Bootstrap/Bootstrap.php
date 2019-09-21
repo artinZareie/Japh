@@ -87,5 +87,6 @@ class Bootstrap
     {
         $kernel = inject(Kernel::class);
         $kernel->call();
+        $kernel->render();
     }
 }

@@ -53,7 +53,7 @@ class Kernel implements IKernel, ISingletone
             if (Platform::isCli()) {
                 $handler = inject(CliHandler::class);
             }
-            $renderable_context = $handler->fire();
+            $this->renderableContext = $handler->fire();
         } catch (InterruptException $e) {
             Renderer::render($e->getRenderable());
         }

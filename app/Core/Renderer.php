@@ -21,7 +21,7 @@ class Renderer
      */
     public static function renderToTerminal(CliRenderable $renderable)
     {
-        echo (string) $renderable;
+        echo $renderable;
         self::exit();
     }
 
