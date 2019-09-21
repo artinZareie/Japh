@@ -82,16 +82,3 @@ function dd(...$vars): void
         die();
     }
 }
-
-/**
- * Terminal Print
- * 
- * Calls CommandLine::print with parameters flush the screen buffer.
- *
- * @param string $expr
- * @return void
- */
-function terminalPrint(string $expr): void
-{
-    CommandLine::ptint($expr);
-}
