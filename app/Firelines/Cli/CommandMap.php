@@ -2,9 +2,7 @@
 
 namespace App\Firelines\Cli;
 
-use App\Core\IRenderable;
 use App\Firelines\CliRenderable;
-use Exception;
 
 class CommandMap
 {
@@ -12,9 +10,7 @@ class CommandMap
     {
         foreach (config("commands", "cli") as $command => $controller) {
             if ($command_target == $command) {
-                dd((new \DI\Container())->get($controller));
                 $controller = inject($controller);
-                dd($controller);
                 return new CliRenderable($controller->run($args));
             }
         }
