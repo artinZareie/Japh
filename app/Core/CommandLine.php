@@ -54,7 +54,7 @@ class CommandLine
      * @param string $expr
      * @return void
      */
-    public static function ptint(string $expr): void
+    public static function print(string $expr): void
     {
         echo $expr;
         flush();
