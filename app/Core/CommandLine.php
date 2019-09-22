@@ -103,4 +103,21 @@ class CommandLine
 
         return $colored_string;
     }
+
+    /**
+     * prompt
+     *
+     * @param string|null $prompt
+     * @return string
+     */
+    public static function prompt(?string $prompt = null): string 
+    {
+        return readline($prompt);
+    }
+
+    public static function readChar(?string $prompt = "")
+    {
+        self::print($prompt);
+        return fgetc(STDIN);
+    }
 }
