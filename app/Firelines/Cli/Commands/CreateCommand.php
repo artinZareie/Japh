@@ -13,10 +13,10 @@ class CreateCommand implements ICommand
     public function run(array $args): string
     {
         if (count($args) == 1 && ($args[0] == "-h" || $args[0] == "--help")) {
-            return "You have to run this command like `php pumkin create:command mycommand MyCommand`";
+            return CommandLine::coloredString("\tYou have to run this command like `php pumkin create:command mycommand MyCommand`", TerminalColors::FCyan);
         }
         elseif (count($args) != 2) {
-            return "arguments has to be like 'command controller'. or call -h parameter.";
+            return CommandLine::coloredString("arguments has to be like 'command controller'. or call -h parameter.", TerminalColors::FRed);
         }
         $command = $args[0];
         $controller = $args[1];
