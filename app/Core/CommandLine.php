@@ -84,4 +84,23 @@ class CommandLine
     {
         return ob_get_contents();    
     }
+
+    public static function coloredString(string $expr, ?string $foreground_color = null, ?string $background_color = null): string
+    {
+        $colored_string = "";
+
+        // Check if given foreground color found
+        if (isset($foreground_color)) {
+            $colored_string .= "\033[" . $foreground_color . "m";
+        }
+        // Check if given background color found
+        if (isset($background_color)) {
+            $colored_string .= "\033[" . $background_color . "m";
+        }
+
+        // Add string and end coloring
+        $colored_string .=  $expr . "\033[0m";
+
+        return $colored_string;
+    }
 }

@@ -10,7 +10,7 @@ return [
          * Commands Comes Here
          */
 
-		"create:kernel" => \App\Fireline\Cli\Commands\KernelCommand::class,
+		"create:config" => \App\Firelines\Cli\Commands\CreateConfigCommand::class,
         "create:command" => \App\Firelines\Cli\Commands\CreateCommand::class,
     ]
 ];

@@ -4,6 +4,7 @@ namespace App\Firelines\Cli\Commands;
 
 use App\Core\CommandLine;
 use App\Core\Storage;
+use App\Core\TerminalColors;
 use App\Firelines\Cli\ICommand;
 
 class CreateCommand implements ICommand
@@ -26,7 +27,7 @@ class CreateCommand implements ICommand
                 $source = $key + 3;                
             }
         }
-        array_insert($code, $source, "\n\t\t\"${command}\" => \\App\\Fireline\\Cli\\Commands\\${controller}::class,");
+        array_insert($code, $source, "\n\t\t\"${command}\" => \\App\\Firelines\\Cli\\Commands\\${controller}::class,");
         Storage::write(dir_glue(config("app_root"), 'Config', 'cli.php'), $code, "");
         Storage::write(dir_glue(config("app_root"), "Firelines", "Cli", "Commands", "${controller}.php"), [
             "<?php",
@@ -46,6 +47,6 @@ class CreateCommand implements ICommand
             "}",
             ""
         ]);
-        return "Command ${command} Has Been Created!";
+        return CommandLine::coloredString("Command ${command} Has Been Created!", TerminalColors::FGreen);
     }
 }
