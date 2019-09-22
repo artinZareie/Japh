@@ -10,6 +10,31 @@
 use App\Core\CommandLine;
 
 /**
+ * array_insert
+ *
+ * @param array $array
+ * @param int $position
+ * @param mixed $insert
+ * @return array
+ */
+function array_insert(array &$array, int $position, $insert): array
+{
+    if ($position > 0) {
+        if ($position == 1) {
+            array_unshift($array, array());
+        } else {
+            $position = $position - 1;
+            array_splice($array, $position, 0, array(
+                ''
+            ));
+        }
+        $array[$position] = $insert;
+    }
+
+    return $array;
+}
+
+/**
   * Dir Glue 
   *
   * Implode all parts with directory seprator.
