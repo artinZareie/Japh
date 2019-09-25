@@ -4,6 +4,6 @@ namespace App\Core;
 
 interface IProvider 
 {
-    public function boot();
-    public function run();
+    public function boot(): void;
+    public function run(): void;
 }
