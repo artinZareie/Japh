@@ -1,6 +1,9 @@
 <?php
 
 return [
+    "providers" => [
+        
+    ],
     "singletones" => [
         App\Core\Kernel::class,
     ],

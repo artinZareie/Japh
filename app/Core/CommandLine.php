@@ -115,6 +115,12 @@ class CommandLine
         return readline($prompt);
     }
 
+    /**
+     * readChar
+     *
+     * @param string|null $prompt
+     * @return void
+     */
     public static function readChar(?string $prompt = "")
     {
         self::print($prompt);

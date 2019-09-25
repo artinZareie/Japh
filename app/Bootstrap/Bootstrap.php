@@ -33,6 +33,7 @@ class Bootstrap
     public function boot(): void
     {
         $this->httpBoot();
+        $this->providerBoot();
         $this->cliBoot();
         $this->dependencyInjectionBoot();
         $this->exceptionBoot();
@@ -91,6 +92,18 @@ class Bootstrap
     }
 
     /**
+     * Provider Boot
+     * 
+     * Runs boot function from defined providers.
+     *
+     * @return void
+     */
+    public function providerBoot(): void
+    {
+        ProviderBootstrap::boot();
+    }
+
+    /**
      * Run kernel
      * 
      * Runs kernel and application and renderer in kernel will render the result.
@@ -100,6 +113,9 @@ class Bootstrap
     public function runApplication(): void
     {
         $kernel = inject(Kernel::class);
+        foreach (ProviderBootstrap::$providers as $provider) {
+            $provider->run();
+        }
         $kernel->call();
         $kernel->render();
     }
