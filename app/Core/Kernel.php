@@ -2,6 +2,7 @@
 
 namespace App\Core;
 use App\Firelines\Cli\Handler as CliHandler;
+use App\Firelines\Http\Handler as HttpHandler;
 
 /**
  * Main Kernel
@@ -52,6 +53,9 @@ class Kernel implements IKernel, ISingletone
         try {
             if (Platform::isCli()) {
                 $handler = inject(CliHandler::class);
+            }
+            else {
+                $handler = inject(HttpHandler::class);
             }
             $this->renderableContext = $handler->fire();
         } catch (InterruptException $e) {

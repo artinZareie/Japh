@@ -33,10 +33,10 @@ class Bootstrap
     public function boot(): void
     {
         $this->httpBoot();
+        $this->exceptionBoot();
+        $this->dependencyInjectionBoot();
         $this->providerBoot();
         $this->cliBoot();
-        $this->dependencyInjectionBoot();
-        $this->exceptionBoot();
     }
 
     /**
@@ -113,10 +113,12 @@ class Bootstrap
     public function runApplication(): void
     {
         $kernel = inject(Kernel::class);
-        foreach (ProviderBootstrap::$providers as $provider) {
-            $provider->run();
-        }
         $kernel->call();
+        foreach (ProviderBootstrap::$providers as $provider) {
+            if (\method_exists($provider, 'run')) {
+                $provider->run();
+            }
+        }
         $kernel->render();
     }
 }

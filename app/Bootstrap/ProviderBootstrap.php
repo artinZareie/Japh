@@ -9,8 +9,8 @@ class ProviderBootstrap
     public static function boot()
     {
         foreach (config("providers", 'kernel') as $provider) {
-            $inst = self::$provider[] = inject($provider);
+            $inst = self::$providers[] = inject($provider);
             $inst->boot();
-        }    
+        }
     }
 }

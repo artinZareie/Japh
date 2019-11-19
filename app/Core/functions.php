@@ -8,6 +8,7 @@
  */
 
 use App\Core\CommandLine;
+use App\Core\Injector;
 
 /**
  * array_insert
@@ -87,7 +88,7 @@ function inject(string $class)
     if (in_array($class, $singletons)) {
         return call_user_func($class . "::getInstance");
     }
-    return App\Core\Injector::get($class);
+    return Injector::get($class);
 }
 
 /**

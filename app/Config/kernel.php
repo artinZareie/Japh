@@ -2,7 +2,7 @@
 
 return [
     "providers" => [
-        
+        App\Providers\HttpResponseProvider::class
     ],
     "singletones" => [
         App\Core\Kernel::class,
