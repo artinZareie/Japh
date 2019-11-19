@@ -3,6 +3,7 @@
 namespace App\Firelines\Http;
 use App\Core\IFireline;
 use App\Core\IRenderable;
+use App\Core\Router;
 use App\Firelines\CliRenderable;
 use App\Firelines\HttpRenderable;
 
@@ -18,7 +19,7 @@ class Handler implements IFireline
      */
     public function fire(): IRenderable
     {
-        inject(HttpRenderable::class);
-        return new CliRenderable("Hello");
+        Router::getCurrentURI();
+        return new HttpRenderable();
     }   
 }
