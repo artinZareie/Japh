@@ -3,6 +3,7 @@
 namespace App\Core;
 use App\Firelines\Cli\Handler as CliHandler;
 use App\Firelines\Http\Handler as HttpHandler;
+use App\Services\HttpResponseService;
 
 /**
  * Main Kernel
@@ -67,6 +68,9 @@ class Kernel implements IKernel, ISingletone
     {
         if (Platform::isCli()) {
             Renderer::renderToTerminal($this->renderableContext);
+        }
+        else {
+            Renderer::renderToHttp(HttpResponseService::getResponseClass());
         }
     }
 }

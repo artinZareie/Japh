@@ -36,7 +36,7 @@ class CommandLine
     /**
      * TargetFile
      * 
-     * Return the first file (lile index.php when you run `php index.php`).
+     * Return the first file (like index.php when you run `php index.php`).
      *
      * @return string|null
      */

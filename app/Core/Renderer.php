@@ -37,7 +37,7 @@ class Renderer
     public function renderToHttp(HttpRenderable $renderable)
     {
         foreach ($renderable->headers as $header => $value) {
-            header("${header}" . ($header == "" ? "" : "") . "${value}");    
+            header("${header}" . ($header == "" ? "" : ":") . "${value}");
         }
         http_response_code($renderable->status_code);
         if ($renderable->session_overwriting) {

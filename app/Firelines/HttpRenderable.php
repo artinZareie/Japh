@@ -52,12 +52,14 @@ class HttpRenderable implements IRenderable
      * A code that show status of response.
      *
      * @var integer
+     * @return HttpRenderable
      */
     public $status_code = 200;
 
-    public function setStatusCode($code = 200): void
+    public function setStatusCode($code = 200): HttpRenderable
     {
-        $this->status_code = $code; 
+        $this->status_code = $code;
+        return $this;
     }
 
     /**
@@ -66,11 +68,12 @@ class HttpRenderable implements IRenderable
      * A function to set content of body of http response.
      *
      * @param string $content
-     * @return void
+     * @return HttpRenderable
      */
-    public function setBody(string $content): void
+    public function setBody(string $content): HttpRenderable
     {
         $this->body = $content;
+        return $this;
     }
 
     /**
@@ -82,20 +85,21 @@ class HttpRenderable implements IRenderable
      */
     public function getBody(): string
     {
-        return $this->body;    
+        return $this->body;
     }
-    
+
     /**
      * Add Body function
      * 
      * Used for merge a string with body.
      *
      * @param string $content
-     * @return void
+     * @return HttpRenderable
      */
-    public function addBody(string $content): void
+    public function addBody(string $content): HttpRenderable
     {
-        $this->body .= $content;    
+        $this->body .= $content;
+        return $this;
     }
 
     /**
@@ -103,11 +107,12 @@ class HttpRenderable implements IRenderable
      * 
      * Resets Body.
      *
-     * @return void
+     * @return HttpRenderable
      */
-    public function clearBody(): void
+    public function clearBody(): HttpRenderable
     {
-        $this->body = '';    
+        $this->body = '';
+        return $this;  
     }
 
     /**
@@ -115,32 +120,35 @@ class HttpRenderable implements IRenderable
      *
      * @param string $name
      * @param string $value
-     * @return void
+     * @return HttpRenderable
      */
-    public function addHeader(string $name, string $value): void
+    public function addHeader(string $name, string $value): HttpRenderable
     {
         $this->headers[$name] = $value;
+        return $this;
     }
 
     /**
      * Remove Header function
      *
      * @param string $name
-     * @return void
+     * @return HttpRenderable
      */
-    public function removeHeader(string $name): void
+    public function removeHeader(string $name): HttpRenderable
     {
         unset($this->headers[$name]);
+        return $this;
     }
 
     /**
      * Clear header function
      *
-     * @return void
+     * @return HttpRenderable
      */
-    public function clearHeaders(): void
+    public function clearHeaders(): HttpRenderable
     {
         $this->headers = [];
+        return $this;
     }
 
     /**
@@ -149,11 +157,41 @@ class HttpRenderable implements IRenderable
      * Will change $_SESSION if is true and you won't be able to change sessions manually.
      *
      * @param boolean $value
-     * @return void
+     * @return HttpRenderable
      */
-    public function overwriteSessions(bool $value = true)
+    public function overwriteSessions(bool $value = true): HttpRenderable
     {
         $this->session_overwriting = $value;
+        return $this;
+    }
+
+    /**
+     * Json function
+     * 
+     * Gets an array and status code. Converts array to json and automaticlly sets headers and status code.
+     *
+     * @param array $data
+     * @param integer $status_code
+     * @return HttpRenderable
+     */
+    public function json(array $data, int $status_code = 200): HttpRenderable
+    {
+        $this->setBody(\json_encode($data))->setStatusCode($status_code)->addHeader('Content-Type', 'application/json');
+        return $this;
+    }
+
+    /**
+     * Redirect function
+     *
+     * @param string $to
+     * @param int $code
+     * @return HttpRenderable
+     */
+    public function redirect(string $to, int $code = 301): HttpRenderable
+    {
+        $this->addHeader("Location", $to);
+        $this->setStatusCode($code);
+        return $this;
     }
 
     /**

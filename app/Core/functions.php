@@ -9,6 +9,8 @@
 
 use App\Core\CommandLine;
 use App\Core\Injector;
+use App\Firelines\HttpRenderable;
+use App\Services\HttpResponseService;
 
 /**
  * array_insert
@@ -107,4 +109,54 @@ function dd(...$vars): void
         }
         die();
     }
+}
+
+/**
+ * Response function
+ *
+ * @return void
+ */
+function response(): HttpRenderable
+{
+    return HttpResponseService::getResponseClass();
+}
+
+/**
+ * Uri function
+ * 
+ * Takes a parameter and combine it with base url.
+ * 
+ * @example uri("/app"); ---> http://localhost:8000/app
+ *
+ * @param string $uri
+ * @return string
+ */
+function uri(string $uri): string
+{
+    return rtrim(config('base_url'), '/') . $uri;
+}
+
+/**
+ * Route function
+ * 
+ * Takes a route name and if it exists returns its uri and if not throws an error.
+ *
+ * @param string $name
+ * @return string
+ */
+function route(string $name): string
+{
+    $routes = config(null, "routes");
+    foreach ($routes as $route) {
+        if (array_key_exists("name", $route) && $route['name'] == $name) {
+            $uri = $route['uri'];
+            break;
+        }
+    }
+
+    if (!isset($uri)) {
+        throw new Exception("Router Error: No route has defined with name \"${name}\"", 101);
+    }
+
+    return rtrim(config('base_url'), '/') . $uri;
 }

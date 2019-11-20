@@ -25,13 +25,26 @@ class HttpResponseService extends Service
     /**
      * Get Response function
      * 
-     * Get response of this service.
+     * Get "Response" of this service.
      *
      * @return HttpRenderable
      */
-    public static function getResponse(): HttpRenderable
+    public static function getResponseClass(): HttpRenderable
     {
         return self::$context['Response'];
+    }
+
+    /**
+     * Set Response Class function
+     * 
+     * Changes the context with passed parameter.
+     *
+     * @param HttpRenderable $renderable
+     * @return void
+     */
+    public static function setResponseClass(HttpRenderable $renderable): void
+    {
+        self::$context['Response'] = $renderable;
     }
 
     /**
@@ -57,7 +70,7 @@ class HttpResponseService extends Service
         self::$context['Response']->{$name} = $value;
     }
 
-    public function addHeader(string $name, string $value): void
+    public static function addHeader(string $name, string $value): void
     {
         self::$context['Response']->headers[$name] = $value;
     }
@@ -68,7 +81,7 @@ class HttpResponseService extends Service
      * @param string $name
      * @return void
      */
-    public function removeHeader(string $name): void
+    public static function removeHeader(string $name): void
     {
         unset(self::$context['Response']->headers[$name]);
     }

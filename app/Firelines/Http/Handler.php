@@ -19,7 +19,7 @@ class Handler implements IFireline
      */
     public function fire(): IRenderable
     {
-        Router::getCurrentURI();
+        Router::runRoute(Router::getCurrentURI());
         return new HttpRenderable();
     }   
 }
