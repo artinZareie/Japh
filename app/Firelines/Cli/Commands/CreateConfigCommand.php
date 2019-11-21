@@ -31,4 +31,3 @@ class CreateConfigCommand implements ICommand
 		return CommandLine::coloredString("${config} has been created in ${directory}!", TerminalColors::FGreen);
 	}
 }
-
