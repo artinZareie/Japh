@@ -7,4 +7,5 @@
 <h2>Other Errors: </h2>
 
 > Other Errors will start with 9; for example 9XX
-1. Code 901: Not supported type. There is an array that has an property with invalid type.
+1. Code 901: Not supported type.
+2. Code 902: Invalid format of string.

@@ -1,13 +1,15 @@
 <?php
 
+use App\Core\RecurcivePipeline;
 use App\Services\HttpResponseService;
+use App\Services\MiddlewaresService;
 
 return [
 	[
 		'uri' => '/',
 		'controller' => function() {
-			return '<html><head></head><body><a href="' . uri('/21') . '">Hello</a></body></html>';
-		}
+			return "<h1>Hello World</h1>";
+		},
 	],
 	[
 		'uri' => '/<[0-9]+>',

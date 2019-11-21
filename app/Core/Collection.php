@@ -33,6 +33,12 @@ class Collection implements Iterator
         $this->collection = array_values($values);
     }
 
+    /**
+     * Collect function
+     *
+     * @param array $values
+     * @return Collection
+     */
     public static function collect(array $values){
         return new static($values);
     }

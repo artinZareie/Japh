@@ -9,6 +9,7 @@
 
 use App\Core\CommandLine;
 use App\Core\Injector;
+use App\Core\Request;
 use App\Firelines\HttpRenderable;
 use App\Services\HttpResponseService;
 
@@ -159,4 +160,14 @@ function route(string $name): string
     }
 
     return rtrim(config('base_url'), '/') . $uri;
+}
+
+/**
+ * Returns an instance of Request class.
+ *
+ * @return Request
+ */
+function request(): Request
+{
+    return new Request();
 }

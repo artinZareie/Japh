@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Firelines\HttpRenderable;
 use App\Services\HttpResponseService;
+use App\Services\MiddlewaresService;
 use Closure;
 use Exception;
 
@@ -21,7 +22,8 @@ class Router
      */
     public static function getCurrentURI(): string
     {
-        return $_SERVER['REQUEST_URI'];    
+        // Delete fragmets and get data from REQUEST_URI
+        return explode("?", explode("?", $_SERVER['REQUEST_URI'])[0])[0];    
     }
 
     /**
@@ -67,10 +69,46 @@ class Router
         $routes = \config(null, 'routes');
         foreach ($routes as $route) {
             if (self::match($uri, $route['uri'], $matches)) {
+                if (array_key_exists('method', $route) && !self::checkMethod($route['method'])) {
+                    continue;
+                }
                 self::directController($route, array_slice($matches, 1));
                 break;
             }
         }
+    }
+
+    /**
+     * Get Method function
+     * 
+     * Returns $_SERVER['REQUEST_METHOD']
+     *
+     * @return string
+     */
+    public static function getMethod(): string
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
+     * Check Method function
+     * 
+     * Checks if the method is matched then will return true.
+     *
+     * @param string|array $method
+     * @return boolean
+     */
+    public static function checkMethod($method): bool
+    {
+        if (is_string($method)) {
+            $method = [$method];
+        }
+
+        foreach ($method as $key => $value) {
+            $method[$key] = \strtoupper($value);
+        }
+
+        return in_array(self::getMethod(), $method);
     }
 
     /**
@@ -84,13 +122,16 @@ class Router
     public static function directController(array $route, array $matches = []): void
     {
         if ($route['controller'] instanceof Closure) {
+            self::runMidlewares();
             $result = self::runClosureController($route['controller'], $matches);
         }
         elseif (is_string($route['controller'])) {
             $params = self::createClassControllerInstance($route['controller']);
+            self::runMidlewares();
             $result = self::runClassController(...array_merge($params, [$matches]));
         }
         elseif ($route['controller'] instanceof Controller) {
+            self::runMidlewares();
             if (array_key_exists('method', $route)) {
                 $method = $route['method'];
             }
@@ -176,5 +217,11 @@ class Router
             $method = 'index';
         }
         return $controller->{$method}(...$matches);
+    }
+
+    protected static function runMidlewares(): void
+    {
+        $pipeline = (new RecurcivePipeline(MiddlewaresService::getContext()))->send(\request());
+        $pipeline->thenReturn();
     }
 }

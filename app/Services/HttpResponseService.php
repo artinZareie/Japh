@@ -10,8 +10,10 @@ use App\Firelines\HttpRenderable;
  * 
  * Contains the main response of application when using http.
  */
-class HttpResponseService extends Service
+class HttpResponseService
 {
+    use Service;
+    
     /**
      * Init function
      *

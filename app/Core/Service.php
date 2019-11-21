@@ -10,7 +10,7 @@ namespace App\Core;
  * Data will be available from anywhere of application by calling them.
  * And It's almost like "Redis".
  */
-class Service {
+trait Service {
     /**
      * Context
      * 
