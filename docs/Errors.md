@@ -4,6 +4,11 @@
 1. Code 100: Controller string isn't valid.
 1. Code 101: No route has been defined with this name.
 
+<h2>View Errors: </h2>
+
+> Router Errors will start with 2; for example 2XX.
+1. Code 201: No such view exists.
+
 <h2>Other Errors: </h2>
 
 > Other Errors will start with 9; for example 9XX

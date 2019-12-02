@@ -8,7 +8,7 @@ return [
 	[
 		'uri' => '/',
 		'controller' => function() {
-			return "<h1>Hello World</h1>";
+			include dir_glue(config("base_root"), "resources", "views", "index.view.php");
 		},
 	],
 	[

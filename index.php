@@ -13,4 +13,6 @@
 
 require_once implode(DIRECTORY_SEPARATOR, [__DIR__, 'vendor', 'autoload.php']);
 
+define('JAPH_START', microtime());
+
 (new App\Bootstrap\Bootstrap());

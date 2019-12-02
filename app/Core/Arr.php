@@ -94,9 +94,10 @@ class Arr implements Iterator
     /**
      * Remove passed keys from array.
      *
+     * @param array $keys
      * @return Arr
      */
-    public function except(): Arr
+    public function except(array $keys): Arr
     {
         return new Arr(array_filter($this->collection, function ($key, $value) use ($keys) {
             return !in_array($key, $keys);
